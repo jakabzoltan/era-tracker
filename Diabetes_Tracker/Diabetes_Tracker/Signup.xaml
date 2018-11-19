@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.Signup">
+    <ContentPage.Content >
+        <ScrollView>
+            <StackLayout Padding="15,10" Spacing="10">
+
+                <Image Source="dolphin64.png" 
+                   Margin="10"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Center"/>
+
+
+
+
+                <Label Text="Personal Information" Font="Bold,24" Margin="0,15,0,0"></Label>
+                <Label Text="This is your account information. Don't lose your password!"/>
+
+                <Entry x:Name="Username" 
+                   Placeholder="Username"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                       Text="{Binding Username}"/>
+
+                <Entry x:Name="Password" 
+                   Placeholder="Password"
+                   IsPassword="true"
+                   VerticalOptions="Center"
+                   Text="{Binding Password}"/>
+
+                <Entry x:Name="ConfirmPassword" 
+                   Placeholder="Confirm Password"
+                   IsPassword="true"
+                   VerticalOptions="Center"
+                   Text="{Binding ConfirmPassword}"/>
+
+                <DatePicker x:Name="Birthday" 
+                        MinimumDate="01/01/1915"
+                        MaximumDate="{Binding MaxDate}"
+                        Date="{Binding Birthday}"
+                        VerticalOptions="Center"
+                   />
+
+
+                <Entry x:Name="Email" 
+                   Placeholder="Email"
+                   VerticalOptions="Center"
+                   Keyboard="Email"
+                   ReturnType="Next"
+                   Text="{Binding Email}"/>
+
+                <Label Text="Glucose Information" Font="Bold,24" Margin="0,15,0,0"></Label>
+                <Label Text="We need to know how many measurements you will take a day!"/>
+                <Entry x:Name="NumberOfMeasurements"
+                   Placeholder="Measurements Per Day"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                   Keyboard="Numeric"
+                   Text="{Binding NumberOfMeasurements}"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Entry x:Name="AcceptableGlucoseMin" 
+                   Placeholder="Minimum"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                   Keyboard="Numeric" Grid.Column="0"
+                           Text="{Binding AcceptableGlucoseMin}"/>
+                    <Entry x:Name="AcceptableGlucoseMax" 
+                   Placeholder="Maximum"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                   Keyboard="Numeric" Grid.Column="1"
+                           Text="{Binding AcceptableGlucoseMax}"/>
+                </Grid>
+                <Label Text="Primary Contact" Font="Bold,24" Margin="0,15,0,0"></Label>
+                <Label Text="This person will be notified should you wish for them to know about your progress"/>
+
+                <Entry x:Name="PrimaryContactName" 
+                   Placeholder="Main Contact Name"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                   Keyboard="Text"
+                   Text="{Binding PrimaryContactName}"/>
+                <Entry x:Name="PrimaryContactPhone" 
+                   Placeholder="Main Contact Phone"
+                   VerticalOptions="Center"
+                   ReturnType="Next"
+                   Keyboard="Telephone"
+                   Text="{Binding PrimaryContactPhone}"/>
+
+                <Grid Margin="0,25">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="Cancel"
+                            Text="Cancel" 
+                            BackgroundColor="Transparent"
+                            Grid.Column="0"
+                    />
+                    <Button x:Name="Submit"
+                            Text="Submit ►"
+                            BackgroundColor="Transparent"
+                            Grid.Column="1"
+                />
+                </Grid>
+
+
+
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.ProfilesPage"
+             Padding="20"
+             Title="Profiles">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="This Device's Profiles" Font="18" VerticalOptions="StartAndExpand"/>
+            <ScrollView x:Name="ProfilesScroller" VerticalOptions="StartAndExpand">
+                <ListView x:Name="Profiles"
+                          SeparatorVisibility="None"
+                          HasUnevenRows="true"
+                          ItemsSource="{Binding Profiles}">
+                </ListView>
+
+
+
+            </ScrollView>
+
+            <Button x:Name="LoginPage"
+                    Text="Log in with a different account ►"
+                    VerticalOptions="EndAndExpand"/>
+
+
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

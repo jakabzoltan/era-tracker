@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.Logbook">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <!--<Grid BackgroundColor="#eeeeee" Padding="15,10">-->
+                    <!--<Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>-->
+                    <!--<StackLayout Grid.Column="0">
+                        <Label Text="Rewards Points" Font="Bold,18"/>
+                        <Label x:Name="PointsLabel" Text="" />
+                    </StackLayout>-->
+
+                    <StackLayout Padding="10">
+                        <Button
+                            x:Name="AddMeasurement"
+                            BackgroundColor="Transparent"
+                            Text="Add Measurement ►"/>
+                    </StackLayout>
+
+                <!--</Grid>-->
+
+                <!-- Rewards Points -->
+                <Label x:Name="NoItems" Text="You have no entries for this day!" Font="Bold,18" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"></Label>
+                <ListView x:Name="LogbookItems"
+                            SeparatorVisibility="Default"
+                            HasUnevenRows="true"
+                            ItemsSource="{Binding LogbookListItems}">
+                </ListView>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

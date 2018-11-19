@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.AddMeasurement">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout VerticalOptions="Center" Padding="15">
+                <Label Text="What was your Glucose Measurement?"/>
+                <Entry x:Name="GlucoseRecorded"    
+                   VerticalOptions="Center"
+                       Placeholder="Glucose Levels"
+                       Keyboard="Numeric"
+                   ReturnType="Next"
+                       Text="{Binding GlucoseRecorded}"/>
+
+                <Label Text="How do you feel?"/>
+                <Picker x:Name="Rating" 
+                   VerticalOptions="Center" 
+                       />
+
+
+                <Label Text="Did you eat any food?"/>
+                <Editor x:Name="FoodEaten" 
+                   VerticalOptions="Center"
+                   Text="{Binding FoodEaten}"/>
+
+
+                <Button x:Name="Submit"
+                        Text="Submit ►"
+                        BackgroundColor="Transparent"
+                        />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

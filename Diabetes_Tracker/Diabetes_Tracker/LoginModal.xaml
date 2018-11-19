@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.Login">
+    <ContentPage.Content 
+                         >
+        <StackLayout Padding="20"
+                     Spacing="5"
+                     x:Name="Container"
+                     VerticalOptions="Center">
+
+            <Entry x:Name="Username" 
+                   Placeholder="Username"
+                   VerticalOptions="Center"
+                   ReturnType="Next"/>
+
+            <Entry x:Name="Password" 
+                   Placeholder="Password"
+                   IsPassword="true"
+                   VerticalOptions="Center"/>
+            <Grid VerticalOptions="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Text="Remember Me?" Grid.Column="0"/>
+                <Switch x:Name="RememberMe" IsToggled="false" Grid.Column="1"/>
+            </Grid>
+            
+            
+            <Button x:Name="LoginButton"
+                    Text="Login"
+                    BackgroundColor="Transparent"
+                    Margin="0, 40, 0, 0"
+                    VerticalOptions="Center"
+                    />
+
+            <Button x:Name="SignUpButton"
+                    Text="Sign Up" 
+                    BackgroundColor="Transparent"
+                    Margin="0, 0, 0, 40"
+                    VerticalOptions="Center"
+                    />
+            
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

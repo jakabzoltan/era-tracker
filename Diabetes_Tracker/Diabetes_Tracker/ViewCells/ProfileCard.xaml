@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Diabetes_Tracker.ViewCells.ProfileCard">
+  <ViewCell.View>
+        <Grid Padding="1" BackgroundColor="LightGray">
+            <Grid BackgroundColor="White"
+                  Padding="20,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Label Text="{Binding UserName}" Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Font="20"/>
+                
+            </Grid>
+        </Grid>
+  </ViewCell.View>
+</ViewCell>
