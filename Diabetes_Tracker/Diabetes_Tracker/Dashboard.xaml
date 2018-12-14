@@ -4,7 +4,9 @@
              x:Class="Diabetes_Tracker.Dashboard">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Button 
+                x:Name="DeleteDatabase"
+                Text="Delete Database"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

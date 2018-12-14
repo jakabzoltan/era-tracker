@@ -8,9 +8,11 @@ using System.Threading.Tasks;
 using Android.Bluetooth;
 using Diabetes_Tracker.Database;
 using Diabetes_Tracker.GATT;
+using Diabetes_Tracker.GATT.CallbackManangers;
 using Diabetes_Tracker.GATT.Chracteristics;
 using Diabetes_Tracker.GATT.Descriptors;
 using Diabetes_Tracker.GATT.Helpers;
+using Diabetes_Tracker.GATT.ServiceManagers;
 using Diabetes_Tracker.GATT.Services;
 using Diabetes_Tracker.Services;
 using Java.Interop;
@@ -28,6 +30,7 @@ namespace Diabetes_Tracker
 {
     public partial class App : Application
     {
+        public static GattCallbackService GattCallbackService { get; set; } = new GattCallbackService();
         public static bool NotificationsSetup { get; set; }
         public static BluetoothAdapter Ble { get; private set; }
         public App(BluetoothAdapter ble) : this()
@@ -56,7 +59,10 @@ namespace Diabetes_Tracker
                 return;
             }
 
-            var connection = accuChek.ConnectGatt(Android.App.Application.Context, true, new GlucoseGattCallback());
+
+            GattCallbackService.AttachCharacteristicConsumer(new GlucoseCharacteristicConsumer(), new GlucoseContextCharacteristicConsumer());
+
+            var connection = accuChek.ConnectGatt(Android.App.Application.Context, true, GattCallbackService);
             
 
 

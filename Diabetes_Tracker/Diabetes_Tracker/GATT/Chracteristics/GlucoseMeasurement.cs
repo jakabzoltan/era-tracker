@@ -1,9 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.Bluetooth;
+using Diabetes_Tracker.GATT.CallbackManangers.Commands;
+using Diabetes_Tracker.GATT.Descriptors;
 using Diabetes_Tracker.GATT.Enumerations;
 using Diabetes_Tracker.GATT.Exceptions;
 using Diabetes_Tracker.GATT.Helpers;
+using Diabetes_Tracker.GATT.ServiceManagers.Interfaces;
 using Diabetes_Tracker.GATT.Services;
+using Java.Util;
 using nexus.core;
 using SQLite;
 
@@ -11,6 +17,7 @@ namespace Diabetes_Tracker.GATT.Chracteristics
 {
     public class GlucoseMeasurement : CharacteristicBase
     {
+
         public static double MmollToMgdl = 18.0182;
         public static double MgdlToMmoll = 1 / MmollToMgdl;
         //Flags
@@ -51,39 +58,49 @@ namespace Diabetes_Tracker.GATT.Chracteristics
             SensorStatusAnnunciationPresent = bytes[0].BitAt(3);
             ContextInformationFollows = bytes[0].BitAt(4);
 
-            SequenceNumber = bytes.SubarrayAt(1, 2).ToInt16();
+            SequenceNumber = characteristic.GetIntValue(GattFormat.Uint16,1).IntValue();
             _baseTime.ConvertFromCharacteristicByBytes(bytes.SubarrayAt(3, 9)); //7 bytes for the date.
             BaseTime = _baseTime.Date;
 
-            //optional properties.
-            if (TimeOffsetPresent)
-            {
-                TimeOffset = bytes.SubarrayAt(10, 11).ToInt16();
+            TimeOffset = characteristic.GetIntValue(GattFormat.Sint16, 10).IntValue();
+            var glcConcentration = characteristic.GetFloatValue(GattFormat.Sfloat, 12).FloatValue();
 
+            if (_glucoseConcentrationUnits)
+            {
+                GlucoseConcentration = Math.Round(glcConcentration * 100000 / MmollToMgdl, 1);
             }
-            if (GlucoseConcentrationPresent)
+            else
             {
-                var glcConcentration = bytes.SubarrayAt(12, 13).GetSfloat16();
+                GlucoseConcentration = Math.Round(glcConcentration * 1000 * MmollToMgdl, 1);
+            }
 
-                if (_glucoseConcentrationUnits)
+            Type = (GlucoseTypes)bytes.SubarrayAt(14, 14).ToInt16().NibbleAt(false);
+            SampleLocation = (GlucoseSampleLocation)bytes.SubarrayAt(14, 14).ToInt16().NibbleAt(true); //need a nibble at method
+
+
+            //SensorStatusAnnunciation = bytes.SubarrayAt(17, 19);
+
+
+        }
+
+        public static Command EnableNotifications()
+        {
+            return new Command(CommandType.Write)
+            {
+                InteractionTarget = GattMapper.UuidForType<GlucoseMeasurement>(),
+                Note = $"Enabling Notification Permissions for Glucose Measurements",
+                Method = (server) =>
                 {
-                    GlucoseConcentration = Math.Round(glcConcentration * 100000 / MmollToMgdl, 1); 
+                    var service = server.GetService(GattMapper.UuidForType<GlucoseService>());
+                    var characteristic = service.GetCharacteristic(GattMapper.UuidForType<GlucoseMeasurement>());
+                    var descriptor =
+                        characteristic.GetDescriptor(GattMapper.UuidForType<ClientCharacteristicConfiguration>());
+
+                    descriptor.SetValue(BluetoothGattDescriptor.EnableNotificationValue.ToArray());
+
+                    return server.WriteDescriptor(descriptor);
                 }
-                else
-                {
-                    GlucoseConcentration = Math.Round(glcConcentration * 1000 * MmollToMgdl, 1);
-                }
-
-
-
-                Type = (GlucoseTypes)bytes.SubarrayAt(14, 14).ToInt16().NibbleAt(false);
-                SampleLocation = (GlucoseSampleLocation)bytes.SubarrayAt(14, 14).ToInt16().NibbleAt(true); ; //need a nibble at method
-            }
-            if (SensorStatusAnnunciationPresent)
-            {
-                //SensorStatusAnnunciation = bytes.SubarrayAt(17, 19);
-            }
-
+            };
         }
 
     }

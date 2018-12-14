@@ -15,12 +15,12 @@
                         <Label x:Name="PointsLabel" Text="" />
                     </StackLayout>-->
 
-                <StackLayout Padding="10">
+                <!--<StackLayout Padding="10">
                     <Button
                         x:Name="AddMeasurement"
                         BackgroundColor="Transparent"
                         Text="Add Measurement ►"/>
-                </StackLayout>
+                </StackLayout>-->
 
                 <!--</Grid>-->
 

@@ -14,11 +14,11 @@
 
         <Label Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Font="Bold"  Text="{Binding GlucoseMeasurement.GlucoseConcentration}" TextColor="{Binding GlucoseTextColor}"  FontSize="24"/>
         <Label Grid.Column="1" VerticalOptions="CenterAndExpand" HorizontalOptions="End"  Text="{Binding GlucoseMeasurement.GlucoseConcenstrationUnits}" TextColor="{Binding GlucoseTextColor}"  FontSize="16"/>
-        <StackLayout Grid.Column="2">
-            
-            <Label VerticalOptions="Center" HorizontalOptions="End" Text="{Binding StringTimeRecorded}" FontSize="14"/>
+        <!--<StackLayout Grid.Column="2">-->
+
+            <Label VerticalOptions="Center" Grid.Column="2" HorizontalOptions="End" Text="{Binding StringTimeRecorded}" FontSize="14"/>
             <!--<Label VerticalOptions="Center" HorizontalOptions="End" Text="{Binding FeelingName}" FontSize="14"/>-->
             <!--<Label VerticalOptions="Center" HorizontalOptions="End" Text="{Binding FoodEaten}" FontSize="14"/>-->
-        </StackLayout>
+        <!--</StackLayout>-->
     </Grid>
 </ViewCell>

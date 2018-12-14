@@ -57,7 +57,7 @@ namespace Diabetes_Tracker
 	        Title = "Logbook";
 
 
-	        AddMeasurement.Clicked += AddMeasurement_Clicked;
+	        //AddMeasurement.Clicked += AddMeasurement_Clicked;
 	    }
 
 	    private void AddMeasurement_Clicked(object sender, System.EventArgs e)

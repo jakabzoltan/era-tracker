@@ -37,8 +37,8 @@ namespace Diabetes_Tracker
                 {
                     new BaseMenuItem { Id = 3, Title = "Dashboard", TargetType = typeof(Dashboard)},
                     new BaseMenuItem { Id = 0, Title = "Logbook", TargetType = typeof(LogbookDates)},
-                    new BaseMenuItem { Id = 1, Title = "Reward Points", TargetType = typeof(RewardPoints)},
-                    new BaseMenuItem { Id = 2, Title = "Sign Out",TargetType = typeof(Login), NavigationPage = false}
+                    //new BaseMenuItem { Id = 1, Title = "Reward Points", TargetType = typeof(RewardPoints)},
+                    new BaseMenuItem { Id = 1, Title = "Sign Out",TargetType = typeof(Login), NavigationPage = false}
                 });
             }
             

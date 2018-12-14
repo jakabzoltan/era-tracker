@@ -2,6 +2,11 @@
 {
     public enum MealTypes
     {
-        
+        ReservedForFutureUse,
+        Preprandial,
+        Postprandial,
+        Fasting,
+        Casual,
+        Bedtime
     }
 }

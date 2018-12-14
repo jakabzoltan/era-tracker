@@ -29,18 +29,10 @@ namespace Diabetes_Tracker.GATT
         private static byte FIRST_RECORD = 0x05; // first/last order needs verifying on device
         private static byte LAST_RECORD = 0x06; // first/last order needs verifying on device
 
-        public static string ACTION_BLUETOOTH_GLUCOSE_METER_SERVICE_UPDATE
-            = "com.eveningoutpost.dexdrip.BLUETOOTH_GLUCOSE_METER_SERVICE_UPDATE";
-        public static string ACTION_BLUETOOTH_GLUCOSE_METER_NEW_SCAN_DEVICE
-            = "com.eveningoutpost.dexdrip.BLUETOOTH_GLUCOSE_METER_NEW_SCAN_DEVICE";
-        public static string BLUETOOTH_GLUCOSE_METER_TAG = "Bluetooth Glucose Meter";
-
         private static string GLUCOSE_READING_MARKER = "Glucose Reading From: ";
 
         private static UUID GLUCOSE_SERVICE = UUID.FromString("00001808-0000-1000-8000-00805f9b34fb");
         private static UUID DEVICE_INFO_SERVICE = UUID.FromString("0000180a-0000-1000-8000-00805f9b34fb");
-
-        private static UUID CLIENT_CHARACTERISTIC_CONFIG = UUID.FromString("00002902-0000-1000-8000-00805f9b34fb");
         private static UUID GLUCOSE_CHARACTERISTIC = UUID.FromString("00002a18-0000-1000-8000-00805f9b34fb");
         private static UUID CONTEXT_CHARACTERISTIC = UUID.FromString("00002a34-0000-1000-8000-00805f9b34fb");
         private static UUID RECORDS_CHARACTERISTIC = UUID.FromString("00002a52-0000-1000-8000-00805f9b34fb");
@@ -55,10 +47,10 @@ namespace Diabetes_Tracker.GATT
 
         public static readonly List<Bluetooth_CMD> Queue = new List<Bluetooth_CMD>();
 
-        public static bool AwaitAcks = false;
-        public static bool AwaitingAck = false;
-        public static bool AwaitingData = false;
-        public static GlucoseCharacteristicManager Manager { get; set; } = new GlucoseCharacteristicManager();
+        public static bool AwaitAcks { get; set; } = false;
+        public static bool AwaitingAck { get; set; }= false;
+        public static bool AwaitingData { get; set; } = false;
+        public static GlucoseCharacteristicConsumer Consumer { get; set; } = new GlucoseCharacteristicConsumer();
         private static bool ack_blocking()
         {
             bool result = AwaitAcks && (AwaitingAck || AwaitingData);
@@ -165,14 +157,12 @@ namespace Diabetes_Tracker.GATT
         public override void OnCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic)
         {
             base.OnCharacteristicChanged(gatt, characteristic);
+
             if (characteristic.Uuid.Equals(GattMapper.UuidForType<GlucoseMeasurement>()))
             {
                 try
                 {
-
-                    var model = new GlucoseMeasurement();
-                    model.BuildCharacteristic(characteristic);
-                    Manager.Intake(model);
+                    Consumer.Consume(characteristic);
 
                     Bluetooth_CMD.poll_queue();
                 }

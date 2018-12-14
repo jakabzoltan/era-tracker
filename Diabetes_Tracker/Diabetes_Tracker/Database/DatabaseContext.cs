@@ -13,7 +13,7 @@ namespace Diabetes_Tracker.Database
         private static readonly VersionInfo DbVersion = new VersionInfo()
         {
             Id = 0,
-            Version = "1.11"
+            Version = "1.12"
         };
 
         private static readonly string SqlName = "LocalDiabetesTracker";
@@ -41,7 +41,6 @@ namespace Diabetes_Tracker.Database
             Context = new SQLiteConnection(DbPath);
         }
 
-
         public bool IsInitialized()
         {
             try
@@ -66,6 +65,7 @@ namespace Diabetes_Tracker.Database
             Context.CreateTable<UserContext>(); //profiles
             Context.CreateTable<LogbookItem>(); //Users Logbook Items
             Context.CreateTable<GlucoseMeasurement>(); //Glucose Items
+            Context.CreateTable<GlucoseMeasurementContext>();
             // insert version info
             Context.Insert(DbVersion);
             // seed data
@@ -83,7 +83,7 @@ namespace Diabetes_Tracker.Database
         /// </summary>
         /// <param name="reinitialize">Reinitializes the base of the database</param>
         /// <returns></returns>
-        private bool WipeDb(bool reinitialize)
+        public bool WipeDb(bool reinitialize)
         {
             try
             {

@@ -2,6 +2,11 @@
 {
     public enum TesterTypes
     {
-        
+        ReservedForFutureUse,
+        Self,
+        HealthCareProfessional,
+        LabTest,
+        TesterNotAvailable,
+
     }
 }

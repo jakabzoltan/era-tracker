@@ -42,7 +42,7 @@ namespace Diabetes_Tracker
             Title = "Logbook";
 
 
-            AddMeasurement.Clicked += AddMeasurement_Clicked;
+            //AddMeasurement.Clicked += AddMeasurement_Clicked;
         }
 
         private void AddMeasurement_Clicked(object sender, System.EventArgs e)
@@ -70,10 +70,8 @@ namespace Diabetes_Tracker
             }
 
 
-            public string StringTimeRecorded =>
-                DateTime.Now-GlucoseMeasurement.BaseTime >= TimeSpan.FromDays(1) ?
-                $"Today at {GlucoseMeasurement.BaseTime.ToShortTimeString()}" :
-                $"{GlucoseMeasurement.BaseTime.ToLongDateString()}, {GlucoseMeasurement.BaseTime.ToShortTimeString()} ";
+            public string StringTimeRecorded => GlucoseMeasurement.BaseTime.ToShortTimeString();
+                
 
             //public string StringFeeling => this.Feeling.Name;
 

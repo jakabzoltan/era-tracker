@@ -2,6 +2,13 @@
 {
     public enum CarbohydrateTypes
     {
-        
+        ReservedForFutureUse,
+        Breakfast,
+        Lunch,
+        Dinner,
+        Snack,
+        Drink,
+        Supper,
+        Brunch
     }
 }
